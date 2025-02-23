@@ -1,0 +1,18 @@
+package layouts
+
+templ Base(title string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="assets/lib/app.css"/>
+			<script src="assets/lib/htmx.js"></script>
+			<script src="assets/lib/alpine.js"></script>
+		</head>
+		<body class="h-screen w-screen" hx-boost="true">
+			{ children... }
+		</body>
+	</html>
+}
