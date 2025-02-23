@@ -17,7 +17,7 @@ const appTitle = "Just another templ(e)"
 func main() {
 	// Create an instance of the app structure
 	app := NewApp()
-	appRouter := NewAppRouter(appTitle)
+	appRouter := newAppRouter(appTitle)
 
 	// Create application with options
 	err := wails.Run(&options.App{

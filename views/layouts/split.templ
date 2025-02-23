@@ -1,0 +1,12 @@
+package layouts
+
+import "some-temple/views/partials"
+
+templ SplitLayout() {
+	<div class="grid h-full grid-cols-[20%_1fr]">
+		@partials.MainNav("dashboard")
+		<main class="p-2">
+			{ children... }
+		</main>
+	</div>
+}

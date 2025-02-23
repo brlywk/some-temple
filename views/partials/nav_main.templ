@@ -1,0 +1,59 @@
+package partials
+
+import "fmt"
+
+// TODO: Maybe add a global config to check if the navLinks should actually all
+// point to "/pages" (or at least to have the option to change the /pages prefix
+// in one place only and always have the correct prefix here)
+//
+// Maybe even load / generate all navLinks from within the router or some global
+// struct that holds information of all pages etc.
+
+// navLink holds information for a navigation link.
+type navLink struct {
+	text   string
+	to     string
+	active bool
+}
+
+// newNavLink returns a new navLink with text and routing to to.
+func newNavLink(text, to string) navLink {
+	return navLink{text: text, to: to}
+}
+
+// update checks if the link should be active based on currentLink and returns
+// an updated link.
+func (nl *navLink) update(currentLink string) navLink {
+	nl.active = nl.to == currentLink
+	return *nl
+}
+
+// url returns the URL for nl.to in /pages.
+func (nl *navLink) url() templ.SafeURL {
+	return templ.URL(fmt.Sprint("/pages/", nl.to))
+}
+
+// links holds all navigation links that should be shown.
+var links = []navLink{
+	newNavLink("Dashboard", "dashboard"),
+	newNavLink("Test Page", "test"),
+}
+
+templ MainNav(activeLink string) {
+	<nav class="flex flex-col gap-2 border-r border-r-gray-300 bg-gray-100 p-2" hx-swap-oob="true" id="nav">
+		for _, link := range links {
+			@MainNavLink(link.update(activeLink))
+		}
+	</nav>
+}
+
+templ MainNavLink(link navLink) {
+	<a
+		href={ link.url() }
+		hx-target="main"
+		class={ "cursor-default rounded px-2 py-1 transition-colors hover:bg-gray-300" ,
+    templ.KV("bg-gray-200", link.active) }
+	>
+		{ link.text }
+	</a>
+}

@@ -4,6 +4,8 @@ import "some-temple/views/layouts"
 
 templ Index(title string) {
 	@layouts.Base(title) {
-		<div>Hello there</div>
+		@layouts.SplitLayout() {
+			@Dashboard()
+		}
 	}
 }

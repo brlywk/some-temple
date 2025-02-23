@@ -1,0 +1,13 @@
+package pages
+
+import (
+	"some-temple/appctx"
+	"some-temple/views/partials"
+)
+
+templ Dashboard() {
+	if !appctx.IsCurrentPath(ctx, "/") {
+		@partials.MainNav("dashboard")
+	}
+	Hello there, I'm the dashboard!
+}

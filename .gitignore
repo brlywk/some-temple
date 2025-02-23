@@ -1,3 +1,7 @@
 build/bin
 node_modules
 frontend/dist
+.DS_Store
+
+# templ generate -watch generates txt files we don't need
+*.txt
